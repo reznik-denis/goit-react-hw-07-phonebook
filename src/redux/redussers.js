@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { formSubmitHendler, deleteContact, chengeFilter } from "./actions.js";
+import { formSubmitHendler, deleteContact, chengeFilter, formSubmitSuccess } from "./actions.js";
 
 const contacts = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -15,4 +15,8 @@ export const itemsRedusser = createReducer(contacts, {
 
 export const filterReduser = createReducer('', {
     [chengeFilter]: (_, { payload }) => payload,
+})
+
+export const contactsItems = createReducer([], {
+  [formSubmitSuccess]: (state, { payload }) => [...state, payload],
 })

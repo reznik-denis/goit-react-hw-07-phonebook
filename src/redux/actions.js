@@ -14,3 +14,9 @@ export const formSubmitHendler = createAction('contact/FormSubmitHendler', ({ na
         },
     };
 });
+
+export const formSubmitRequest = createAction('contact/formSubmitRequest');
+
+export const formSubmitSuccess = createAction('contact/formSubmitSuccess');
+
+export const formSubmitError = createAction('contact/formSubmitError');
