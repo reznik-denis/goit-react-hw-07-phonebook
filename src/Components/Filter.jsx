@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { chengeFilter } from "../redux/actions";
+import { selectors } from "../redux";
 
 function Filter() {
-    const value = useSelector(state => state.contacts.filter);
+    const value = useSelector(state => selectors.getFilter(state));
     const dispatch = useDispatch();
 
     return (<label className="labelBlock">
