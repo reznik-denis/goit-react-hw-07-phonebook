@@ -1,13 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from "../redux/actions";
+import { operations } from "../redux";
 
 function Button({ id }) {
     const dispatch = useDispatch();
     return <button
         type="button"
         className="buttonDelete"
-        onClick={() => dispatch(deleteContact(id))}>Delete
+        onClick={() => dispatch(operations.deleteContact(id))}>Delete
     </button>
 };
 

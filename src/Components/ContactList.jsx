@@ -1,21 +1,23 @@
-import React from 'react';
+import {useEffect} from 'react';
 import ButtonDelete from './ButtonDelete';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { operations, selectors } from "../redux";
 
 function ContactList() {
-    const contacts = useSelector(({ contacts: { items, filter } }) => getVisibleContacts(items, filter))
-    return (<ul className="list">
+    const contacts = useSelector(selectors.getVisibleContacts);
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        dispatch(operations.fetchContact());
+    }, [dispatch]);
+    
+    return (contacts.length > 0 && (<ul className="list">
             {contacts.map(({id, name, number}) => (
               <li key={id} className="listItem">{name}: {number}
                     <ButtonDelete id={id}/>
               </li>
               ))}
-          </ul>)
+          </ul>))
 };
-
-const getVisibleContacts = (allContacts, filter) => {
-    const normalizedFilter = filter.toLowerCase();
-    return allContacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
-}
 
 export default ContactList;

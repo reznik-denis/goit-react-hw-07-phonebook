@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { formSubmitHendler } from "../redux/operations";
+import { operations } from '../redux';
 
 
 function ContactForm () {
@@ -23,7 +23,7 @@ function ContactForm () {
             alert(`${name} is already in contacts`);
          return
          };
-        disratch(formSubmitHendler({ name, number }));
+        disratch(operations.formSubmit({ name, number }));
         reset();
     };
 

@@ -2,12 +2,12 @@ import axios from "axios";
 
 axios.defaults.baseURL = 'http://localhost:4040';
 
-export async function fetchContactsAdd(text) {
-    return await axios.post(`/contacts`, text).then(({data}) => data);
+export async function fetchContactsAdd(data) {
+    return await axios.post(`/contacts`, data).then(({data}) => data);
 }
 
-export async function fetchContactsDelete(IdContact) {
-    return await axios.delete(`/contacts/${IdContact}`);
+export async function fetchContactsDelete(id) {
+    return await axios.delete(`/contacts/${id}`).then(({data}) => data);
 }
 
 export async function fetchContact( ) {
