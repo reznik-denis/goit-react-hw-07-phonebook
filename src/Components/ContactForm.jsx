@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { formSubmitHendler } from "../redux/actions";
+import { formSubmitHendler } from "../redux/operations";
 
 
 function ContactForm () {

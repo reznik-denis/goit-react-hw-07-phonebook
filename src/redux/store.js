@@ -1,19 +1,19 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { configureStore, getDefaultMiddleware, combineReducers } from "@reduxjs/toolkit";
-import { persistStore, persistReducer, FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+// import { persistStore, FLUSH,
+//   REHYDRATE,
+//   PAUSE,
+//   PERSIST,
+//   PURGE,
+//   REGISTER } from 'redux-persist';
+// import storage from 'redux-persist/lib/storage';
 import { itemsRedusser, filterReduser } from "./redussers";
 
-const persistConfig = {
-  key: 'contact',
-  storage,
-  blacklist: ['filter'],
-}
+// const persistConfig = {
+//   key: 'contact',
+//   storage,
+//   blacklist: ['filter'],
+// }
 
 const contactsReduser = combineReducers({
     items: itemsRedusser,
@@ -22,16 +22,16 @@ const contactsReduser = combineReducers({
 
 const store = configureStore({
     reducer: {
-        contacts: persistReducer(persistConfig, contactsReduser)
+        contacts: contactsReduser
     },
     devTools: process.env.NODE_ENV === 'development',
     middleware: getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-    }
+    // serializableCheck: {
+    //   ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+    // }
   })
 })
 
-const persistore = persistStore(store);
+// const persistore = persistStore(store);
 
-export default { store, persistore};
+export default store;

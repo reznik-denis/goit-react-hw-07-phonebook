@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { formSubmitHendler, deleteContact, chengeFilter, formSubmitSuccess } from "./actions.js";
+import { deleteContact, chengeFilter, formSubmitSuccess, formSubmitRequest, formSubmitError } from "./actions.js";
 
 const contacts = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -9,14 +9,20 @@ const contacts = [
 ];
 
 export const itemsRedusser = createReducer(contacts, {
-    [formSubmitHendler]: (state, { payload }) => [...state, payload],
-    [deleteContact]: (state, { payload }) => state.filter(contact => contact.id !== payload),
-})
+  [formSubmitSuccess]: (state, { payload }) => [...state, payload],
+  [deleteContact]: (state, { payload }) => state.filter(contact => contact.id !== payload),
+});
 
 export const filterReduser = createReducer('', {
-    [chengeFilter]: (_, { payload }) => payload,
-})
+  [chengeFilter]: (_, { payload }) => payload,
+});
 
 export const contactsItems = createReducer([], {
   [formSubmitSuccess]: (state, { payload }) => [...state, payload],
+});
+
+export const loading = createReducer(false, {
+  [formSubmitRequest]: () => true,
+  [formSubmitSuccess]: () => false,
+  [formSubmitError]: () => false
 })

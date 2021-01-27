@@ -1,8 +1,18 @@
 import axios from "axios";
 
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'http://localhost:4040';
 
-export async function fetchContacts() {
-    const { data } = await axios.get(`/contacts`);
-    return data;
+export async function fetchContactsAdd(text) {
+    return await axios.post(`/contacts`, text).then(({data}) => data);
 }
+
+export async function fetchContactsDelete(IdContact) {
+    return await axios.delete(`/contacts/${IdContact}`);
+}
+
+export async function fetchContact( ) {
+    return await axios.get(`/contacts`).then(res => res.data);
+}
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default { fetchContactsAdd, fetchContactsDelete, fetchContact };

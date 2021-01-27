@@ -1,14 +1,18 @@
-import * as contactApi from "../services/contactsApi";
+// import * as contactApi from "../services/contactsApi";
 import * as contactsActions from './actions';
+import axios from "axios";
 
-export const fetchContacts = () => async dispatch => {
+axios.defaults.baseURL = 'http://localhost:4040';
+
+export const formSubmitHendler = ({ name, number }) => dispatch => {
+    const contact = {
+        name,
+        number
+    };
+
     dispatch(contactsActions.formSubmitRequest());
 
-    try {
-        const contacts = await contactApi.fetchContacts();
-        dispatch(contactsActions.formSubmitSuccess(contacts));
-    } catch (error) {
-        dispatch(contactsActions.formSubmitError(error));
-    }
-
+    axios.post(`/contacts`, contact)
+        .then(({ data }) => dispatch(contactsActions.formSubmitSuccess(data)))
+        .catch(error => dispatch(contactsActions.formSubmitError(error)));
 };
